@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { FileText, LogOut, User } from "lucide-react";
 
-export function Header({ userName = "User", onLogout }) {
+interface HeaderProps {
+  userName?: string;
+  onLogout?: () => void;
+}
+
+export function Header({ userName = "User", onLogout }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 glass-card">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">

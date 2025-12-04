@@ -3,7 +3,13 @@ import { X, Mail, Lock, User, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export function SignupModal({ isOpen, onClose, onSignup }) {
+interface SignupModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSignup: (data: { name: string; email: string; password: string }) => void;
+}
+
+export function SignupModal({ isOpen, onClose, onSignup }: SignupModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,10 +17,10 @@ export function SignupModal({ isOpen, onClose, onSignup }) {
     confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: Record<string, string> = {};
     
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
@@ -37,7 +43,7 @@ export function SignupModal({ isOpen, onClose, onSignup }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       onSignup({
