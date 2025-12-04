@@ -4,19 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-interface Message {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-  timestamp: Date;
-}
-
-interface AIChatProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const initialMessages: Message[] = [
+const initialMessages = [
   {
     id: "1",
     role: "assistant",
@@ -25,15 +13,15 @@ const initialMessages: Message[] = [
   },
 ];
 
-export function AIChat({ isOpen, onClose }: AIChatProps) {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+export function AIChat({ isOpen, onClose }) {
+  const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
   const handleSend = () => {
     if (!input.trim()) return;
 
-    const userMessage: Message = {
+    const userMessage = {
       id: Date.now().toString(),
       role: "user",
       content: input,
@@ -46,7 +34,7 @@ export function AIChat({ isOpen, onClose }: AIChatProps) {
 
     // Simulate AI response
     setTimeout(() => {
-      const aiResponse: Message = {
+      const aiResponse = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
         content: getAIResponse(input),
@@ -57,7 +45,7 @@ export function AIChat({ isOpen, onClose }: AIChatProps) {
     }, 1500);
   };
 
-  const getAIResponse = (query: string): string => {
+  const getAIResponse = (query) => {
     const responses = [
       "Based on my analysis, the top candidate shows strong alignment with the technical requirements, particularly in React and TypeScript.",
       "I've identified several key strengths in the resume pool. Would you like me to break down the skill distribution?",

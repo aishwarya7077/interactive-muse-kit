@@ -4,23 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-interface FileUploadProps {
-  onFilesSelected: (files: File[]) => void;
-  acceptedFormats?: string;
-  multiple?: boolean;
-}
-
 export function FileUpload({ 
   onFilesSelected, 
   acceptedFormats = ".pdf,.doc,.docx",
   multiple = true 
-}: FileUploadProps) {
+}) {
   const [dragActive, setDragActive] = useState(false);
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState([]);
   const [urlInput, setUrlInput] = useState("");
   const [showUrlInput, setShowUrlInput] = useState(false);
 
-  const handleDrag = useCallback((e: React.DragEvent) => {
+  const handleDrag = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -30,7 +24,7 @@ export function FileUpload({
     }
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
+  const handleDrop = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
@@ -43,7 +37,7 @@ export function FileUpload({
     }
   }, [files, multiple, onFilesSelected]);
 
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInput = (e) => {
     const selectedFiles = e.target.files ? Array.from(e.target.files) : [];
     if (selectedFiles.length > 0) {
       const newFiles = multiple ? [...files, ...selectedFiles] : [selectedFiles[0]];
@@ -52,7 +46,7 @@ export function FileUpload({
     }
   };
 
-  const removeFile = (index: number) => {
+  const removeFile = (index) => {
     const newFiles = files.filter((_, i) => i !== index);
     setFiles(newFiles);
     onFilesSelected(newFiles);

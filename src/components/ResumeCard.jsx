@@ -2,25 +2,14 @@ import { User, Mail, Phone, MapPin, Star, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-interface ResumeCardProps {
-  name: string;
-  email: string;
-  phone?: string;
-  location?: string;
-  score: number;
-  skills: string[];
-  experience: string;
-  onViewDetails?: () => void;
-}
-
-function getScoreColor(score: number) {
+function getScoreColor(score) {
   if (score >= 85) return "score-excellent";
   if (score >= 70) return "score-good";
   if (score >= 50) return "score-fair";
   return "score-poor";
 }
 
-function getScoreLabel(score: number) {
+function getScoreLabel(score) {
   if (score >= 85) return "Excellent Match";
   if (score >= 70) return "Good Match";
   if (score >= 50) return "Fair Match";
@@ -36,7 +25,7 @@ export function ResumeCard({
   skills,
   experience,
   onViewDetails,
-}: ResumeCardProps) {
+}) {
   return (
     <div className="group glass-card rounded-xl p-5 hover-lift cursor-pointer" onClick={onViewDetails}>
       <div className="flex items-start justify-between gap-4">

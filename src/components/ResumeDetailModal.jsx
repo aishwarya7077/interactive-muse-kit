@@ -2,35 +2,14 @@ import { X, User, Mail, Phone, MapPin, Briefcase, GraduationCap, Star, Download 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-interface ResumeDetailModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  resume: {
-    name: string;
-    email: string;
-    phone?: string;
-    location?: string;
-    score: number;
-    skills: string[];
-    experience: string;
-    summary?: string;
-    education?: string;
-    workHistory?: Array<{
-      company: string;
-      role: string;
-      duration: string;
-    }>;
-  } | null;
-}
-
-function getScoreColor(score: number) {
+function getScoreColor(score) {
   if (score >= 85) return "text-emerald-400";
   if (score >= 70) return "text-green-400";
   if (score >= 50) return "text-yellow-400";
   return "text-red-400";
 }
 
-export function ResumeDetailModal({ isOpen, onClose, resume }: ResumeDetailModalProps) {
+export function ResumeDetailModal({ isOpen, onClose, resume }) {
   if (!isOpen || !resume) return null;
 
   return (

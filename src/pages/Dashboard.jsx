@@ -102,18 +102,18 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [jobDescription, setJobDescription] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedResume, setSelectedResume] = useState<typeof sampleResumes[0] | null>(null);
+  const [selectedResume, setSelectedResume] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showAIChat, setShowAIChat] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
 
   const handleLogout = () => {
     toast({ title: "Logged out", description: "See you next time!" });
     navigate("/");
   };
 
-  const handleFilesSelected = (files: File[]) => {
+  const handleFilesSelected = (files) => {
     setUploadedFiles(files);
     if (files.length > 0) {
       toast({

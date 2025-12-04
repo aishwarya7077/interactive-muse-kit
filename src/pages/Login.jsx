@@ -15,7 +15,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -38,7 +38,7 @@ export default function Login() {
     }, 1000);
   };
 
-  const handleSignup = (data: { name: string; email: string; password: string }) => {
+  const handleSignup = (data) => {
     toast({
       title: "Account created!",
       description: `Welcome, ${data.name}! Please log in.`,
